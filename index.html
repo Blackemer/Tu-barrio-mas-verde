@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu barrio más verde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2A4B3A;
+            --accent-color: #C6E08C;
+            --background-color: #F5F5F3;
+            --text-dark: #2A4B3A;
+            --text-light: #ffffff;
+            --shadow: 0 4px 6px rgba(42, 75, 58, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-color);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(42, 75, 58, 0.7), rgba(198, 224, 140, 0.3)), url('imgs/amazon_rainforest_digital_landscape_green_hero_banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-color), #a8d975);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(198, 224, 140, 0.4);
+        }
+
+        /* Podcast Section */
+        .podcast-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .episode-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(42, 75, 58, 0.15);
+        }
+
+        .episode-thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .episode-content {
+            padding: 1.5rem;
+        }
+
+        .episode-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .episode-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .play-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .play-button:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* Audio Player */
+        .audio-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .audio-player::-webkit-media-controls-panel {
+            background-color: var(--background-color);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-color), #1a3325);
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(198, 224, 140, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: #a8d975;
+            transform: translateY(-2px);
+        }
+
+        .form-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Leaf silhouette -->
+                    <path d="M20 2 C15 2, 8 8, 8 15 C8 22, 15 28, 20 32 C25 28, 32 22, 32 15 C32 8, 25 2, 20 2 Z" 
+                          fill="var(--primary-color)"/>
+                    <!-- Audio waveform in the center -->
+                    <path d="M18 12 Q18.5 16, 18 20 Q17.5 24, 18 28" 
+                          stroke="var(--accent-color)" 
+                          stroke-width="2" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                    <path d="M20 10 Q20.5 14, 20 18 Q19.5 22, 20 30" 
+                          stroke="var(--accent-color)" 
+                          stroke-width="2.5" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                    <path d="M22 12 Q22.5 16, 22 20 Q21.5 24, 22 28" 
+                          stroke="var(--accent-color)" 
+                          stroke-width="2" 
+                          fill="none" 
+                          stroke-linecap="round"/>
+                </svg>
+                <span class="logo-text">Tu barrio más verde</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li><a href="#podcast" class="nav-link">Podcast</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="hero-title">Jóvenes Construyendo Comunidades Verdes en Lamud</h1>
+            <p class="hero-subtitle">La voz del cambio que empieza en nuestra comunidad. Un proyecto CAS del COAR Amazonas.</p>
+            <a href="#podcast" class="cta-button">Escucha el Podcast</a>
+        </div>
+    </section>
+
+    <!-- Podcast Section -->
+    <section class="podcast-section" id="podcast">
+        <h2 class="section-title">Episodios del Podcast</h2>
+        <div class="episodes-grid">
+            <div class="episode-card">
+                <img src="imgs/amazon_rainforest_community_aerial_fog_green_environmental.jpg" alt="Episodio 1" class="episode-thumbnail">
+                <div class="episode-content">
+                    <h3 class="episode-title">Ep. 1: El Desafío de los Residuos</h3>
+                    <p class="episode-description">Exploramos los problemas de gestión de residuos en Lamud y cómo los jóvenes pueden liderar soluciones sostenibles en nuestra comunidad.</p>
+                    <button class="play-button" onclick="playEpisode(1)">Reproducir Episodio</button>
+                </div>
+            </div>
+            <div class="episode-card">
+                <img src="imgs/gogreen_community_action_podcast_thumbnail.jpg" alt="Episodio 2" class="episode-thumbnail">
+                <div class="episode-content">
+                    <h3 class="episode-title">Ep. 2: Acciones Comunitarias que Funcionan</h3>
+                    <p class="episode-description">Conoce las iniciativas exitosas de conservación y cómo las comunidades jóvenes están creando impacto real en el Amazonas peruano.</p>
+                    <button class="play-button" onclick="playEpisode(2)">Reproducir Episodio</button>
+                </div>
+            </div>
+            <div class="episode-card">
+                <img src="imgs/amazon_rainforest_digital_landscape_hero_banner_green_tones.jpg" alt="Episodio 3" class="episode-thumbnail">
+                <div class="episode-content">
+                    <h3 class="episode-title">Ep. 3: Tecnología y Naturaleza en Armonía</h3>
+                    <p class="episode-description">Descubrimos cómo la tecnología puede ser aliada de la conservación ambiental y qué herramientas pueden usar los jóvenes para crear cambio.</p>
+                    <button class="play-button" onclick="playEpisode(3)">Reproducir Episodio</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Player Container -->
+        <div class="audio-container">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Intro del Podcast</h3>
+            <p style="margin-bottom: 1rem; color: #666;">Escucha el intro del podcast "Tu Barrio Más Verde"</p>
+            <audio controls class="audio-player" id="mainAudioPlayer">
+                <source src="" type="audio/mpeg" id="audioSource">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+        <div class="contact-container">
+            <h2 class="section-title" style="color: white;">Contacto</h2>
+            <p>¿Quieres unirte al movimiento? ¿Tienes ideas para nuestro proyecto? ¡Contáctanos!</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" class="form-input form-textarea" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Enviar Mensaje</button>
+                <div id="successMessage" class="form-success">
+                    ¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Tu barrio más verde - Proyecto CAS COAR Amazonas</p>
+        <p>Proyecto desarrollado por <a href="#" target="_blank">Jóvenes de Lamud</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Generate audio from text using Web Speech API
+        function generateIntroAudio() {
+            const introText = "¡Esto es 'Tu Barrio Más Verde'! El podcast donde la juventud de Lamud toma acción por el planeta. ¡Empezamos!";
+            
+            // Create a simple beep sequence to simulate intro (since we can't generate real audio)
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const duration = 12; // 12 seconds
+            const sampleRate = audioContext.sampleRate;
+            const numSamples = duration * sampleRate;
+            const audioBuffer = audioContext.createBuffer(1, numSamples, sampleRate);
+            const channelData = audioBuffer.getChannelData(0);
+
+            // Create a simple melody using different frequencies
+            const frequencies = [261.63, 329.63, 392.00, 523.25]; // C, E, G, C (higher)
+            const noteLength = numSamples / frequencies.length;
+
+            for (let i = 0; i < numSamples; i++) {
+                const noteIndex = Math.floor(i / noteLength);
+                const freq = frequencies[Math.min(noteIndex, frequencies.length - 1)];
+                const t = i / sampleRate;
+                
+                // Create a smooth envelope
+                const envelope = Math.sin((i / numSamples) * Math.PI * 4) * 0.3;
+                const wave = Math.sin(2 * Math.PI * freq * t) * envelope;
+                
+                channelData[i] = wave;
+            }
+
+            // Convert to WAV blob
+            const wav = audioBufferToWav(audioBuffer);
+            const blob = new Blob([wav], { type: 'audio/wav' });
+            const audioUrl = URL.createObjectURL(blob);
+            
+            return audioUrl;
+        }
+
+        function audioBufferToWav(buffer) {
+            const length = buffer.length;
+            const arrayBuffer = new ArrayBuffer(44 + length * 2);
+            const view = new DataView(arrayBuffer);
+            
+            // WAV header
+            const writeString = (offset, string) => {
+                for (let i = 0; i < string.length; i++) {
+                    view.setUint8(offset + i, string.charCodeAt(i));
+                }
+            };
+            
+            writeString(0, 'RIFF');
+            view.setUint32(4, 36 + length * 2, true);
+            writeString(8, 'WAVE');
+            writeString(12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true);
+            view.setUint32(24, buffer.sampleRate, true);
+            view.setUint32(28, buffer.sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(36, 'data');
+            view.setUint32(40, length * 2, true);
+            
+            // Convert float samples to 16-bit PCM
+            const channelData = buffer.getChannelData(0);
+            let offset = 44;
+            for (let i = 0; i < length; i++) {
+                const sample = Math.max(-1, Math.min(1, channelData[i]));
+                view.setInt16(offset, sample * 0x7FFF, true);
+                offset += 2;
+            }
+            
+            return arrayBuffer;
+        }
+
+        // Initialize audio player
+        function initializeAudio() {
+            const audioPlayer = document.getElementById('mainAudioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            
+            try {
+                const audioUrl = generateIntroAudio();
+                audioSource.src = audioUrl;
+                audioPlayer.load();
+            } catch (error) {
+                console.log('Audio generation not supported in this browser');
+                // Fallback: show a message about the audio
+                const container = document.querySelector('.audio-container');
+                container.innerHTML += '<p style="margin-top: 1rem; color: #666; font-style: italic;">Audio intro generado dinámicamente con síntesis de sonido</p>';
+            }
+        }
+
+        // Episode player functionality
+        function playEpisode(episodeNumber) {
+            const episodes = [
+                {
+                    title: "El Desafío de los Residuos",
+                    description: "Episodio sobre gestión de residuos en Lamud"
+                },
+                {
+                    title: "Acciones Comunitarias que Funcionan", 
+                    description: "Iniciativas exitosas de conservación"
+                },
+                {
+                    title: "Tecnología y Naturaleza en Armonía",
+                    description: "Tecnología como aliada de la conservación"
+                }
+            ];
+
+            const episode = episodes[episodeNumber - 1];
+            
+            // Create a custom audio context for episode preview
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Set different frequencies for each episode
+                const frequencies = [220, 330, 440]; // A, E, A (lower)
+                oscillator.frequency.setValueAtTime(frequencies[episodeNumber - 1], audioContext.currentTime);
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 2);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 2);
+                
+                // Show episode info
+                showEpisodeInfo(episode);
+            } catch (error) {
+                console.log('Episode preview not supported');
+                showEpisodeInfo(episode);
+            }
+        }
+
+        function showEpisodeInfo(episode) {
+            // Create a simple notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--primary-color);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                box-shadow: var(--shadow);
+                z-index: 1001;
+                max-width: 300px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                <h4 style="margin: 0 0 0.5rem 0;">${episode.title}</h4>
+                <p style="margin: 0; opacity: 0.9;">${episode.description}</p>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Contact form functionality
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('.submit-button');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Disable submit button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Reset form
+                this.reset();
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                
+                // Reset button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Mensaje';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+                
+                // Store form data locally (simulation)
+                const formData = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    mensaje: document.getElementById('mensaje').value,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Store in localStorage for demo purposes
+                const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+                submissions.push(formData);
+                localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+                
+                console.log('Form submission stored:', formData);
+                
+            }, 1500);
+        });
+
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            initializeAudio();
+            
+            // Add scroll effect to header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToAnimate = document.querySelectorAll('.episode-card, .audio-container, .contact-section');
+            elementsToAnimate.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
