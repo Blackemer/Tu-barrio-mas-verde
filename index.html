@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu barrio más verde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2A4B3A;
+            --accent-color: #C6E08C;
+            --background-color: #F5F5F3;
+            --text-dark: #2A4B3A;
+            --text-light: #ffffff;
+            --shadow: 0 4px 6px rgba(42, 75, 58, 0.1);
+            --shadow-lg: 0 10px 25px rgba(42, 75, 58, 0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-color);
+        }
+
+        /* Admin Panel Styles */
+        .admin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-panel {
+            background: white;
+            width: 90%;
+            max-width: 1200px;
+            height: 90%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .admin-sidebar h2 {
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .admin-nav {
+            list-style: none;
+        }
+
+        .admin-nav li {
+            margin-bottom: 1rem;
+        }
+
+        .admin-nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .admin-nav button:hover,
+        .admin-nav button.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .close-admin {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-modal.show {
+            display: flex;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .login-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .login-form {
+            text-align: left;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(198, 224, 140, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            background: #1a3324;
+        }
+
+        .login-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Episode Management */
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .episode-card-admin {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .episode-card-admin:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .episode-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .episode-content {
+            padding: 1.5rem;
+        }
+
+        .episode-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .episode-description {
+            color: #666;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .episode-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .edit-btn {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .edit-btn:hover {
+            background: #a8d975;
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Form Styles */
+        .admin-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(198, 224, 140, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Drag & Drop */
+        .drop-zone {
+            border: 3px dashed var(--accent-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            background: rgba(198, 224, 140, 0.1);
+        }
+
+        .drop-zone.dragover {
+            background: var(--accent-color);
+            border-color: var(--primary-color);
+        }
+
+        .drop-zone input {
+            display: none;
+        }
+
+        .drop-zone-label {
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        /* Preview Styles */
+        .preview-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .preview-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1a3324;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Main Page Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a3324 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: #a8d975;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .episode-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .episode-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .episode-info {
+            padding: 1.5rem;
+        }
+
+        .episode-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .episode-description {
+            color: #666;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .episode-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .audio-preview {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .audio-preview:hover {
+            background: #a8d975;
+        }
+
+        .play-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .play-button:hover {
+            background: #1a3324;
+            transform: translateY(-1px);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(198, 224, 140, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: #a8d975;
+            transform: translateY(-2px);
+        }
+
+        .form-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-panel {
+                width: 95%;
+                height: 95%;
+            }
+
+            .admin-sidebar {
+                width: 200px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-content {
+                padding: 1rem;
+            }
+
+            .login-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Page Content -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo" onclick="showAdminLogin()">🌱 Tu barrio más verde</div>
+            <ul class="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#episodios" class="nav-link">Episodios</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Tu barrio más verde</h1>
+                <p class="hero-subtitle">Transformando Lamud, Amazonas, un episodio a la vez</p>
+                <a href="#episodios" class="cta-button">🎧 Escucha nuestro podcast</a>
+            </div>
+        </section>
+
+        <section id="episodios" class="section">
+            <h2 class="section-title">Episodios</h2>
+            <div id="episodes-container" class="episodes-grid">
+                <!-- Episodes will be loaded here -->
+            </div>
+        </section>
+
+        <section id="contacto" class="section">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-section">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Mensaje</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Tu barrio más verde - COAR Amazonas</p>
+        <p>Proyecto CAS - Lamud, Amazonas, Perú</p>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="login-modal">
+        <div class="login-container">
+            <div class="login-logo">🌱</div>
+            <h2 class="login-title">Panel de Administración</h2>
+            <p class="login-subtitle">Ingresa la contraseña para continuar</p>
+            
+            <div id="login-error" class="login-error">
+                Contraseña incorrecta. Intenta nuevamente.
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <input type="password" id="admin-password" class="login-input" placeholder="Contraseña" required>
+                <button type="submit" class="login-btn">Ingresar</button>
+            </form>
+            
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: #666;">
+                Solo para administradores autorizados
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-modal" class="admin-modal">
+        <div class="admin-panel">
+            <div class="admin-sidebar">
+                <button class="close-admin" onclick="closeAdminPanel()">&times;</button>
+                <h2>🌱 Panel Admin</h2>
+                <ul class="admin-nav">
+                    <li><button onclick="showSection('episodes')" class="active">📻 Episodios</button></li>
+                    <li><button onclick="showSection('add')">➕ Agregar</button></li>
+                    <li><button onclick="showSection('settings')">⚙️ Configuración</button></li>
+                </ul>
+            </div>
+            <div class="admin-content">
+                <!-- Episodes Management Section -->
+                <div id="episodes-section" class="admin-section active">
+                    <h3>Gestionar Episodios</h3>
+                    <div id="admin-episodes-grid" class="episodes-grid">
+                        <!-- Admin episodes will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Add Episode Section -->
+                <div id="add-section" class="admin-section">
+                    <h3>Agregar Nuevo Episodio</h3>
+                    <form id="add-episode-form" class="admin-form">
+                        <div class="form-group">
+                            <label class="form-label" for="episode-title">Título del episodio</label>
+                            <input type="text" id="episode-title" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="episode-description">Descripción</label>
+                            <textarea id="episode-description" class="form-textarea" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="episode-video-url">URL del video/podcast (YouTube, Spotify, etc.)</label>
+                            <input type="url" id="episode-video-url" class="form-input" placeholder="https://youtube.com/watch?v=..." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="episode-image-url">URL de la imagen</label>
+                            <input type="url" id="episode-image-url" class="form-input" placeholder="https://imgur.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">O sube una imagen</label>
+                            <div id="drop-zone" class="drop-zone">
+                                <p>📁 Arrastra tu imagen aquí o <span class="drop-zone-label">haz clic para seleccionar</span></p>
+                                <input type="file" id="image-input" accept="image/*">
+                                <img id="preview-image" class="preview-image" style="display: none;">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar Episodio</button>
+                    </form>
+
+                    <!-- Preview Section -->
+                    <div class="preview-section">
+                        <h4 class="preview-title">Vista previa</h4>
+                        <div id="episode-preview">
+                            <p>Completa el formulario para ver una vista previa del episodio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="admin-section">
+                    <h3>Configuración</h3>
+                    <div class="admin-form">
+                        <div class="alert alert-success">
+                            <strong>Datos guardados:</strong> Todos tus cambios se guardan automáticamente en tu navegador.
+                        </div>
+                        <button class="btn btn-secondary" onclick="exportData()">📤 Exportar datos</button>
+                        <button class="btn btn-secondary" onclick="importData()">📥 Importar datos</button>
+                        <button class="btn btn-secondary" onclick="clearData()" style="background: #e74c3c; color: white;">🗑️ Limpiar todo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let episodes = [];
+        let editingEpisodeIndex = -1;
+        let isAdminAuthenticated = false;
+        const ADMIN_PASSWORD = 'coar2024'; // Contraseña de administrador
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEpisodes();
+            renderEpisodes();
+            setupEventListeners();
+            updatePreview();
+            
+            // Auto-show login if on admin route
+            checkRoute();
+        });
+
+        // Check current route
+        function checkRoute() {
+            const path = window.location.pathname;
+            if (path === '/admin' || path.includes('admin')) {
+                showAdminLogin();
+            }
+        }
+
+        // Load episodes from localStorage
+        function loadEpisodes() {
+            const saved = localStorage.getItem('tbmv_episodes');
+            if (saved) {
+                episodes = JSON.parse(saved);
+            } else {
+                // Default episodes for demo
+                episodes = [
+                    {
+                        title: "Introducción a Tu barrio más verde",
+                        description: "Conocemos el proyecto CAS que transformará Lamud, Amazonas. Descubre nuestra misión de crear conciencia ambiental en la comunidad.",
+                        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        imageUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        title: "Residuos orgánicos vs. inorgánicos",
+                        description: "Aprendemos sobre la clasificación de residuos y cómo podemos reducir nuestro impacto ambiental en el hogar.",
+                        videoUrl: "https://open.spotify.com/episode/example",
+                        imageUrl: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    },
+                    {
+                        title: "Compostaje casero",
+                        description: "Guía práctica para crear tu propio compost en casa y aprovechar los residuos orgánicos de manera inteligente.",
+                        videoUrl: "https://www.youtube.com/watch?v=example",
+                        imageUrl: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                    }
+                ];
+            }
+        }
+
+        // Save episodes to localStorage
+        function saveEpisodes() {
+            localStorage.setItem('tbmv_episodes', JSON.stringify(episodes));
+        }
+
+        // Render episodes on main page
+        function renderEpisodes() {
+            const container = document.getElementById('episodes-container');
+            container.innerHTML = episodes.map((episode, index) => `
+                <div class="episode-card fade-in">
+                    <img src="${episode.imageUrl}" alt="${episode.title}" class="episode-thumbnail" onerror="this.src='https://via.placeholder.com/400x200/2A4B3A/ffffff?text=Imagen'">
+                    <div class="episode-info">
+                        <h3 class="episode-title">${episode.title}</h3>
+                        <p class="episode-description">${episode.description}</p>
+                        <div class="episode-meta">
+                            <button class="audio-preview" onclick="previewAudio('${episode.title}')">🎧 Escuchar preview</button>
+                            <a href="${getEmbedUrl(episode.videoUrl)}" target="_blank" class="play-button">▶️ Reproducir</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render admin episodes
+            renderAdminEpisodes();
+        }
+
+        // Render episodes in admin panel
+        function renderAdminEpisodes() {
+            const container = document.getElementById('admin-episodes-grid');
+            container.innerHTML = episodes.map((episode, index) => `
+                <div class="episode-card-admin">
+                    <img src="${episode.imageUrl}" alt="${episode.title}" class="episode-image" onerror="this.src='https://via.placeholder.com/300x200/2A4B3A/ffffff?text=Imagen'">
+                    <div class="episode-content">
+                        <h3 class="episode-title">${episode.title}</h3>
+                        <p class="episode-description">${episode.description.substring(0, 100)}...</p>
+                        <div class="episode-actions">
+                            <button class="edit-btn" onclick="editEpisode(${index})">✏️ Editar</button>
+                            <button class="delete-btn" onclick="deleteEpisode(${index})">🗑️ Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get embed URL for different platforms
+        function getEmbedUrl(url) {
+            if (url.includes('youtube.com/watch?v=')) {
+                const videoId = url.split('v=')[1].split('&')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes('youtu.be/')) {
+                const videoId = url.split('youtu.be/')[1].split('?')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes('open.spotify.com/episode/')) {
+                const episodeId = url.split('episode/')[1].split('?')[0];
+                return `https://open.spotify.com/embed/episode/${episodeId}`;
+            }
+            return url; // Return original URL if not recognized
+        }
+
+        // Admin authentication functions
+        function showAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('admin-password').focus();
+        }
+
+        function hideAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openAdminPanel() {
+            document.getElementById('admin-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            isAdminAuthenticated = false;
+            localStorage.removeItem('tbmv_admin_auth');
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.admin-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${sectionName}-section`).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Episode management functions
+        function editEpisode(index) {
+            editingEpisodeIndex = index;
+            const episode = episodes[index];
+            
+            document.getElementById('episode-title').value = episode.title;
+            document.getElementById('episode-description').value = episode.description;
+            document.getElementById('episode-video-url').value = episode.videoUrl;
+            document.getElementById('episode-image-url').value = episode.imageUrl;
+            
+            showSection('add');
+            updatePreview();
+        }
+
+        function deleteEpisode(index) {
+            if (confirm('¿Estás seguro de que quieres eliminar este episodio?')) {
+                episodes.splice(index, 1);
+                saveEpisodes();
+                renderEpisodes();
+                
+                // Show success message
+                showAlert('Episodio eliminado exitosamente', 'success');
+            }
+        }
+
+        // Form submission
+        document.getElementById('add-episode-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                title: document.getElementById('episode-title').value,
+                description: document.getElementById('episode-description').value,
+                videoUrl: document.getElementById('episode-video-url').value,
+                imageUrl: document.getElementById('episode-image-url').value || getUploadedImageUrl()
+            };
+
+            if (editingEpisodeIndex >= 0) {
+                episodes[editingEpisodeIndex] = formData;
+                showAlert('Episodio actualizado exitosamente', 'success');
+            } else {
+                episodes.push(formData);
+                showAlert('Episodio agregado exitosamente', 'success');
+            }
+
+            saveEpisodes();
+            renderEpisodes();
+            this.reset();
+            editingEpisodeIndex = -1;
+            updatePreview();
+        });
+
+        // Drag and drop functionality
+        const dropZone = document.getElementById('drop-zone');
+        const imageInput = document.getElementById('image-input');
+        const previewImage = document.getElementById('preview-image');
+
+        dropZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+
+        imageInput.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        dropZone.addEventListener('click', function() {
+            imageInput.click();
+        });
+
+        function handleFileUpload(file) {
+            // In a real implementation, you would upload to a service like Imgur
+            // For demo purposes, we'll use a placeholder or FileReader
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+                document.getElementById('episode-image-url').value = e.target.result;
+                updatePreview();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function getUploadedImageUrl() {
+            const previewImg = document.getElementById('preview-image');
+            return previewImg.style.display !== 'none' ? previewImg.src : '';
+        }
+
+        // Preview functionality
+        function updatePreview() {
+            const title = document.getElementById('episode-title').value;
+            const description = document.getElementById('episode-description').value;
+            const videoUrl = document.getElementById('episode-video-url').value;
+            const imageUrl = document.getElementById('episode-image-url').value || getUploadedImageUrl();
+
+            if (title || description) {
+                document.getElementById('episode-preview').innerHTML = `
+                    <div class="episode-card">
+                        <img src="${imageUrl || 'https://via.placeholder.com/400x200/2A4B3A/ffffff?text=Imagen'}" alt="${title}" class="episode-thumbnail">
+                        <div class="episode-info">
+                            <h3 class="episode-title">${title || 'Título del episodio'}</h3>
+                            <p class="episode-description">${description || 'Descripción del episodio'}</p>
+                            <div class="episode-meta">
+                                <button class="audio-preview" onclick="previewAudio('${title}')">🎧 Escuchar preview</button>
+                                <a href="${videoUrl || '#'}" target="_blank" class="play-button">▶️ Reproducir</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Audio preview (Web Speech API)
+        function previewAudio(title) {
+            if ('speechSynthesis' in window) {
+                const text = `Episodio: ${title}. Bienvenidos a Tu barrio más verde, el podcast que transforma Lamud, Amazonas, un episodio a la vez.`;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Tu navegador no soporta la previsualización de audio');
+            }
+        }
+
+        // Settings functions
+        function exportData() {
+            const data = {
+                episodes: episodes,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'tu-barrio-mas-verde-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showAlert('Datos exportados exitosamente', 'success');
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            if (data.episodes && Array.isArray(data.episodes)) {
+                                episodes = data.episodes;
+                                saveEpisodes();
+                                renderEpisodes();
+                                showAlert('Datos importados exitosamente', 'success');
+                            } else {
+                                throw new Error('Formato de archivo inválido');
+                            }
+                        } catch (error) {
+                            showAlert('Error al importar datos: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function clearData() {
+            if (confirm('¿Estás seguro de que quieres eliminar todos los datos? Esta acción no se puede deshacer.')) {
+                localStorage.removeItem('tbmv_episodes');
+                episodes = [];
+                renderEpisodes();
+                showAlert('Todos los datos han sido eliminados', 'success');
+            }
+        }
+
+        // Alert system
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            
+            // Insert at the top of the current section
+            const currentSection = document.querySelector('.admin-section.active');
+            currentSection.insertBefore(alertDiv, currentSection.firstChild);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
+
+        // Update preview on form change
+        document.querySelectorAll('#add-episode-form input, #add-episode-form textarea').forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
+        // Setup general event listeners
+        function setupEventListeners() {
+            // Login form submission
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const password = document.getElementById('admin-password').value;
+                
+                if (password === ADMIN_PASSWORD) {
+                    isAdminAuthenticated = true;
+                    localStorage.setItem('tbmv_admin_auth', 'true');
+                    hideAdminLogin();
+                    openAdminPanel();
+                    
+                    // Clear the password field
+                    document.getElementById('admin-password').value = '';
+                    document.getElementById('login-error').style.display = 'none';
+                } else {
+                    document.getElementById('login-error').style.display = 'block';
+                    document.getElementById('admin-password').value = '';
+                    document.getElementById('admin-password').focus();
+                }
+            });
+
+            // Contact form
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                // Save to localStorage
+                const contacts = JSON.parse(localStorage.getItem('tbmv_contacts') || '[]');
+                contacts.push({
+                    ...data,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('tbmv_contacts', JSON.stringify(contacts));
+                
+                // Show success message
+                this.innerHTML = '<div class="form-success">¡Gracias por tu mensaje! Te contactaremos pronto.</div>';
+                
+                setTimeout(() => {
+                    this.reset();
+                    this.innerHTML = `
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensaje</label>
+                            <textarea id="message" name="message" class="form-textarea" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar mensaje</button>
+                    `;
+                }, 3000);
+            });
+
+            // Keyboard shortcuts for admin
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+Shift+A to show admin login
+                if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                    e.preventDefault();
+                    if (!isAdminAuthenticated) {
+                        showAdminLogin();
+                    }
+                }
+                
+                // Escape to close admin
+                if (e.key === 'Escape') {
+                    const adminModal = document.getElementById('admin-modal');
+                    const loginModal = document.getElementById('admin-login-modal');
+                    
+                    if (adminModal.classList.contains('show')) {
+                        closeAdminPanel();
+                    } else if (loginModal.classList.contains('show')) {
+                        hideAdminLogin();
+                    }
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Restore admin session if exists
+        const adminAuth = localStorage.getItem('tbmv_admin_auth');
+        if (adminAuth === 'true') {
+            isAdminAuthenticated = true;
+        }
+    </script>
+</body>
+</html>
