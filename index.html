@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu barrio más verde</title>
+    <title>Tu barrio más verde - Podcast Ambiental CAS</title>
+    <meta name="description" content="Podcast ambiental de estudiantes CAS de COAR Amazonas para la comunidad de Lamud, Perú. Acciones verdes y cuidado del medio ambiente.">
+    <meta name="keywords" content="ambiente, podcast, CAS, COAR, Lamud, Amazonas, acciones verdes, sostenibilidad">
+    <meta name="author" content="Estudiantes CAS COAR Amazonas">
+    <meta name="theme-color" content="#2A4B3A">
+    <meta name="msapplication-TileColor" content="#2A4B3A">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEzczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJaIiBmaWxsPSIjMkI0QjNBIi8+CjxwYXRoIGQ9Ik0xNyA3LjI2QzcuNjMgNy4yNiA3LjI2IDE1LjM3IDcuMjYgMTUuMzdsMS45NiAxMC42M2MxLjI4IDcuMDcgOS4yNyAxMC4yMSAxMy4wNSA1LjIxYzQuNTItNS45OCA0LjQ5LTEyLjk3LS4zMy0xNy4yM0wxMS4zIDE2LjgzbC0uMDctLjA3QzcuOTggMTEuMjcgOS41MiA3LjE1IDE3IDcuMjZaIiBmaWxsPSIjQjZFMDBDIi8+Cjwvc3ZnPgo=">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg4IiBoZWlnaHQ9IjE4OCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iMTgiIGZpbGw9IiMyQjRCM0EiLz4KPHN2ZyB4PSIyMyIgeT0iMjMiIHdpZHRoPSI3NCIgaGVpZ2h0PSI3NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjNjZFMDBCIj4KICA8cGF0aCBkPSJNMTIgMkM2LjQ4LDIsMiw2LjQ4LDIsMTJzNC40OCwxMCwxMCwxMCwxMC00LjQ4LDEwLTEwUzE3LjUyLDIsMTIsMloiLz4KICA8cGF0aCBkPSJNMTcsNy4yNkM3LjYzLDcuMjYsNy4yNiwxNS4zNyw3LjI2LDE1LjM3bDEuOTYsMTAuNjNjMS4yOCw3LjA3LDkuMjcsMTAuMjEsMTMuMDUsNS4yMWM0LjUyLTUuOTgsNC40OS0xMi45Ny0uMzMtMTcuMjNMMTEuMywxNi44M2wtLjA3LS4wN0M3Ljk4LDExLjI3LDkuNTIsNy4xNSwxNyw3LjI2WiIvPgo8L3N2Zz4KPC9zdmc+">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -811,6 +824,274 @@
         .fade-in {
             animation: fadeInUp 0.6s ease;
         }
+
+        /* Analytics Dashboard Styles */
+        .analytics-dashboard {
+            padding: 1rem;
+        }
+
+        .analytics-dashboard h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--accent-color);
+        }
+
+        .stat-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card small {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .analytics-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .analytics-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .episodes-ranking {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--background-color);
+            border-radius: var(--radius);
+        }
+
+        .ranking-item .rank {
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 40px;
+        }
+
+        .ranking-item .title {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .ranking-item .views {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .activity-log {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item .count {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .daily-chart {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 0.5rem;
+            height: 150px;
+            padding: 1rem;
+            background: var(--background-color);
+            border-radius: var(--radius);
+        }
+
+        .day-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .day-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-bar {
+            width: 100%;
+            height: 80px;
+            background: white;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px 4px 0 0;
+            transition: height 0.3s ease;
+        }
+
+        .day-number {
+            font-size: 0.7rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .export-section {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn-export, .btn-reset {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-export {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .btn-reset {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #c0392b;
+        }
+
+        /* WhatsApp CTA Buttons */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe57;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .whatsapp-btn-large {
+            padding: 16px 24px;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), #3a5f47);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: var(--border-radius);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive Analytics */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .daily-chart {
+                flex-wrap: wrap;
+                height: auto;
+                gap: 1rem;
+            }
+            
+            .day-stat {
+                flex: none;
+                width: 100%;
+            }
+            
+            .day-bar {
+                height: 60px;
+            }
+            
+            .export-section {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -862,6 +1143,22 @@
                 </form>
             </div>
         </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>¡Únete al movimiento verde de Lamud!</h2>
+                <p>¿Tienes ideas para mejorar nuestro barrio? ¿Quieres reportar problemas ambientales? ¡Contáctanos directamente!</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/51999999999?text=Hola! Quiero unirme al movimiento Tu barrio más verde y contribuir a mejorar nuestro barrio. ¿Cómo puedo participar?" target="_blank" class="whatsapp-btn whatsapp-btn-large">
+                        📱 Unirme por WhatsApp
+                    </a>
+                    <a href="#contacto" class="whatsapp-btn whatsapp-btn-large" style="background: #6c757d;">
+                        📧 Contactar por Email
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -900,6 +1197,7 @@
                 <ul class="admin-nav">
                     <li><button onclick="showSection('episodes')" class="active">📻 Episodios</button></li>
                     <li><button onclick="showSection('add')">➕ Agregar</button></li>
+                    <li><button onclick="showSection('analytics')">📊 Analytics</button></li>
                     <li><button onclick="showSection('settings')">⚙️ Configuración</button></li>
                 </ul>
             </div>
@@ -962,6 +1260,14 @@
                         <button class="btn btn-secondary" onclick="exportData()">📤 Exportar datos</button>
                         <button class="btn btn-secondary" onclick="importData()">📥 Importar datos</button>
                         <button class="btn btn-secondary" onclick="clearData()" style="background: #e74c3c; color: white;">🗑️ Limpiar todo</button>
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics-section" class="admin-section">
+                    <h3>📊 Analytics del Proyecto CAS</h3>
+                    <div id="analytics-content">
+                        <p>Cargando estadísticas...</p>
                     </div>
                 </div>
             </div>
@@ -1041,6 +1347,9 @@
                         <div class="episode-meta">
                             <button class="audio-preview" onclick="previewAudio('${episode.title}')">🎧 Escuchar preview</button>
                             <a href="${getEmbedUrl(episode.videoUrl)}" target="_blank" class="play-button">▶️ Reproducir</a>
+                            <a href="https://wa.me/51999999999?text=${encodeURIComponent('¡Hola! Escuché tu episodio "' + episode.title + '" del podcast "Tu barrio más verde". ¿Me puedes dar más información sobre las acciones ambientales que mencionas?')}" target="_blank" class="whatsapp-btn">
+                                💬 Contactar por WhatsApp
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1246,6 +1555,9 @@
                             <div class="episode-meta">
                                 <button class="audio-preview" onclick="previewAudio('${title}')">🎧 Escuchar preview</button>
                                 <a href="${videoUrl || '#'}" target="_blank" class="play-button">▶️ Reproducir</a>
+                                <a href="https://wa.me/51999999999?text=${encodeURIComponent('¡Hola! Escuché el episodio "' + title + '" del podcast "Tu barrio más verde". ¿Me puedes dar más información sobre las acciones ambientales que mencionas?')}" target="_blank" class="whatsapp-btn">
+                                    💬 Contactar por WhatsApp
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1443,10 +1755,283 @@
             });
         });
 
+        // ================================
+        // SISTEMA DE ANALYTICS PARA PROYECTO CAS
+        // ================================
+        
+        // Analytics data storage
+        function getAnalytics() {
+            const analytics = localStorage.getItem('tbmv_analytics');
+            return analytics ? JSON.parse(analytics) : {
+                totalVisits: 0,
+                uniqueVisitors: 0,
+                episodeViews: {},
+                contactMessages: 0,
+                adminActions: {},
+                dailyStats: {},
+                lastUpdated: new Date().toISOString()
+            };
+        }
+
+        function saveAnalytics(data) {
+            localStorage.setItem('tbmv_analytics', JSON.stringify(data));
+        }
+
+        // Track page visit
+        function trackVisit() {
+            const analytics = getAnalytics();
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Count total visits
+            analytics.totalVisits++;
+            
+            // Count daily visits
+            if (!analytics.dailyStats[today]) {
+                analytics.dailyStats[today] = 0;
+            }
+            analytics.dailyStats[today]++;
+            
+            // Track unique visitors (session-based)
+            if (!sessionStorage.getItem('tbmv_visit_tracked')) {
+                analytics.uniqueVisitors++;
+                sessionStorage.setItem('tbmv_visit_tracked', 'true');
+            }
+            
+            analytics.lastUpdated = new Date().toISOString();
+            saveAnalytics(analytics);
+        }
+
+        // Track episode view
+        function trackEpisodeView(episodeTitle) {
+            const analytics = getAnalytics();
+            if (!analytics.episodeViews[episodeTitle]) {
+                analytics.episodeViews[episodeTitle] = 0;
+            }
+            analytics.episodeViews[episodeTitle]++;
+            analytics.lastUpdated = new Date().toISOString();
+            saveAnalytics(analytics);
+        }
+
+        // Track admin action
+        function trackAdminAction(action) {
+            const analytics = getAnalytics();
+            if (!analytics.adminActions[action]) {
+                analytics.adminActions[action] = 0;
+            }
+            analytics.adminActions[action]++;
+            analytics.lastUpdated = new Date().toISOString();
+            saveAnalytics(analytics);
+        }
+
+        // Display analytics dashboard
+        function showAnalyticsDashboard() {
+            const analytics = getAnalytics();
+            const topEpisodes = Object.entries(analytics.episodeViews)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+            
+            const analyticsHTML = `
+                <div class="analytics-dashboard">
+                    <h2>📊 Dashboard de Analytics - Proyecto CAS</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>👀 Visitas Totales</h3>
+                            <div class="stat-number">${analytics.totalVisits}</div>
+                            <small>Personas que han visitado el sitio</small>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <h3>🎯 Visitantes Únicos</h3>
+                            <div class="stat-number">${analytics.uniqueVisitors}</div>
+                            <small>Personas diferentes (por sesión)</small>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <h3>💌 Mensajes</h3>
+                            <div class="stat-number">${analytics.contactMessages}</div>
+                            <small>Contactos recibidos</small>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <h3>🎧 Reproducciones</h3>
+                            <div class="stat-number">${Object.values(analytics.episodeViews).reduce((a, b) => a + b, 0)}</div>
+                            <small>Clicks en episodios</small>
+                        </div>
+                    </div>
+
+                    <div class="analytics-section">
+                        <h3>🏆 Episodios Más Populares</h3>
+                        ${topEpisodes.length > 0 ? `
+                            <div class="episodes-ranking">
+                                ${topEpisodes.map(([title, views], index) => `
+                                    <div class="ranking-item">
+                                        <span class="rank">#${index + 1}</span>
+                                        <span class="title">${title}</span>
+                                        <span class="views">${views} vistas</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : '<p>No hay datos de episodios aún</p>'}
+                    </div>
+
+                    <div class="analytics-section">
+                        <h3>📈 Actividad Reciente</h3>
+                        <div class="activity-log">
+                            ${Object.entries(analytics.adminActions).slice(0, 10).map(([action, count]) => `
+                                <div class="activity-item">
+                                    <span>${action}</span>
+                                    <span class="count">${count} veces</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="analytics-section">
+                        <h3>📊 Últimos 7 Días</h3>
+                        <div class="daily-chart">
+                            ${Object.entries(analytics.dailyStats)
+                                .slice(-7)
+                                .map(([date, visits]) => `
+                                    <div class="day-stat">
+                                        <div class="day-label">${new Date(date).toLocaleDateString('es-ES', {weekday: 'short'})}</div>
+                                        <div class="day-bar">
+                                            <div class="bar-fill" style="height: ${(visits / Math.max(...Object.values(analytics.dailyStats))) * 100}%"></div>
+                                        </div>
+                                        <div class="day-number">${visits}</div>
+                                    </div>
+                                `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="export-section">
+                        <button onclick="exportAnalytics()" class="btn-export">📥 Exportar Datos</button>
+                        <button onclick="resetAnalytics()" class="btn-reset">🔄 Reiniciar Analytics</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analytics-content').innerHTML = analyticsHTML;
+            trackAdminAction('Visualizar Analytics');
+        }
+
+        // Export analytics data
+        function exportAnalytics() {
+            const analytics = getAnalytics();
+            const data = {
+                ...analytics,
+                exportDate: new Date().toISOString(),
+                project: 'Tu barrio más verde - CAS COAR Amazonas'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `analytics-cas-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showAlert('Datos de analytics exportados', 'success');
+            trackAdminAction('Exportar Analytics');
+        }
+
+        // Reset analytics (with confirmation)
+        function resetAnalytics() {
+            if (confirm('¿Estás seguro de reiniciar todas las estadísticas? Esto eliminará todos los datos de analytics.')) {
+                localStorage.removeItem('tbmv_analytics');
+                showAnalyticsDashboard();
+                showAlert('Analytics reiniciados', 'success');
+                trackAdminAction('Reiniciar Analytics');
+            }
+        }
+
+        // Track contact form submission
+        const originalContactHandler = document.getElementById('contact-form').onsubmit;
+        if (originalContactHandler) {
+            document.getElementById('contact-form').onsubmit = function(e) {
+                const analytics = getAnalytics();
+                analytics.contactMessages++;
+                analytics.lastUpdated = new Date().toISOString();
+                saveAnalytics(analytics);
+                originalContactHandler.call(this, e);
+            };
+        }
+
+        // Track episode clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('play-button') || e.target.closest('.episode-card')) {
+                const episodeCard = e.target.closest('.episode-card');
+                const titleElement = episodeCard.querySelector('.episode-title');
+                if (titleElement) {
+                    trackEpisodeView(titleElement.textContent);
+                }
+            }
+        });
+
+        // Initialize analytics
+        trackVisit();
+        
+        // Show analytics button in admin if authenticated
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isAdminAuthenticated) {
+                const nav = document.querySelector('.admin-nav');
+                if (nav && !nav.querySelector('[onclick="showSection(\'analytics\')"]')) {
+                    const analyticsBtn = document.createElement('button');
+                    analyticsBtn.innerHTML = '📊 Analytics';
+                    analyticsBtn.onclick = () => showSection('analytics');
+                    analyticsBtn.className = 'nav-button';
+                    nav.appendChild(analyticsBtn);
+                }
+            }
+        });
+
         // Restore admin session if exists
         const adminAuth = localStorage.getItem('tbmv_admin_auth');
         if (adminAuth === 'true') {
             isAdminAuthenticated = true;
+        }
+
+        // PWA Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('PWA: Service Worker registrado exitosamente');
+                        // Verificar actualizaciones
+                        registration.addEventListener('updatefound', function() {
+                            console.log('PWA: Nueva versión disponible');
+                        });
+                    })
+                    .catch(function(err) {
+                        console.log('PWA: Error en registro:', err);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Mostrar botón de instalación después de unos segundos
+            setTimeout(function() {
+                if (confirm('¿Te gustaría instalar "Tu barrio más verde" como app para acceso rápido?')) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choiceResult) {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('PWA: Usuario aceptó instalar la app');
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            }, 5000);
+        });
+
+        // Detectar si la app ya está instalada
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('PWA: App corriendo en modo standalone');
         }
     </script>
 </body>

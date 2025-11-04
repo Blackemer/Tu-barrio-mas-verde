@@ -5,6 +5,15 @@
 
 El panel ahora utiliza **autenticación por contraseña** siguiendo estándares profesionales de la industria.
 
+### 📊 **Sistema de Analytics CAS**
+¡Nuevo! El proyecto incluye un sistema completo de analytics para medir el impacto del proyecto CAS:
+
+- **Contador de visitas** - Visitas totales y visitantes únicos
+- **Engagement de episodios** - Tracking de clicks y reproducciones
+- **Métricas de contacto** - Mensajes recibidos
+- **Dashboard visual** - Estadísticas en tiempo real
+- **Exportación de datos** - Para reportes CAS
+
 ---
 
 ## 🚀 **¿Cómo acceder al Panel de Administración?**
@@ -39,6 +48,7 @@ El panel ahora utiliza **autenticación por contraseña** siguiendo estándares 
 - **Fácil acceso** - Solo necesitas recordar la contraseña
 - **Seguro** - Sin exposición pública del panel
 - **Eficiente** - Acceso directo vía URL
+- **Analytics integrados** - Datos CAS automáticos
 
 ---
 
@@ -48,6 +58,112 @@ El panel ahora utiliza **autenticación por contraseña** siguiendo estándares 
 - **Ver todos** los episodios en grid moderna
 - **Editar** con un solo click
 - **Eliminar** con confirmación de seguridad
+
+### 📊 **Dashboard de Analytics CAS**
+**NUEVA SECCIÓN:** Métricas completas para evaluar el proyecto
+
+#### **Estadísticas Principales:**
+- **👀 Visitas Totales:** Contador de todas las visitas
+- **🎯 Visitantes Únicos:** Personas diferentes (por sesión)
+- **💌 Mensajes:** Contactos recibidos desde el formulario
+- **🎧 Reproducciones:** Total de clicks en episodios
+
+#### **Datos Detallados:**
+- **🏆 Episodios más populares:** Ranking por vistas
+- **📈 Actividad reciente:** Acciones del panel admin
+- **📊 Últimos 7 días:** Gráfico de visitas por día
+
+#### **Exportación de Datos:**
+- **📥 Exportar analytics:** Descarga datos en JSON
+- **🔄 Reiniciar datos:** Limpia todas las estadísticas
+- **📋 Reportes CAS:** Datos listos para presentar
+
+### ➕ **Agregar Episodios**
+- **Formulario intuitivo** con previsualización en tiempo real
+- **Drag & drop** para subir imágenes
+- **Validación automática** de URLs de YouTube/Spotify
+- **Preview de audio** usando síntesis de voz del navegador
+
+### ⚙️ **Configuración y Datos**
+- **📤 Exportar datos:** Backup completo en JSON
+- **📥 Importar datos:** Restaurar desde archivo
+- **🗑️ Limpiar todo:** Reinicio completo (con confirmación)
+
+---
+
+## 📊 **Sistema de Analytics - Guía para Proyecto CAS**
+
+### 🎯 **¿Por qué es importante para CAS?**
+
+El proyecto CAS requiere **evidencia del impacto** para la evaluación final. El sistema de analytics proporciona datos objetivos sobre:
+
+- **Alcance del proyecto** (visitas totales)
+- **Engagement comunitario** (interacción con contenido)
+- **Impacto del podcast** (reproducciones de episodios)
+- **Comunicación efectiva** (mensajes de contacto)
+
+### 📈 **Métricas Automáticas que se Registran:**
+
+#### **🔍 Tracking de Visitantes:**
+- Cada visita a la página se registra automáticamente
+- Visitantes únicos (sin duplicados por sesión)
+- Patrones de visitas por día/semana
+
+#### **🎧 Engagement con Contenido:**
+- Clicks en botones de reproducción
+- Episodios más populares (ranking automático)
+- Tiempo de interacción con el sitio
+
+#### **💬 Comunicación:**
+- Mensajes enviados desde el formulario de contacto
+- Datos básicos del contacto (nombre, email)
+
+#### **⚙️ Gestión Admin:**
+- Acciones realizadas en el panel admin
+- Episodios creados/editados/eliminados
+- Exportaciones de datos realizadas
+
+### 📋 **Cómo usar los datos para CAS:**
+
+#### **Para el Reporte Final:**
+1. **Accede al panel admin** → **Analytics**
+2. **Exporta los datos** usando el botón "📥 Exportar Analytics"
+3. **Incluye en tu reporte:**
+   - Screenshots del dashboard
+   - Datos numéricos principales
+   - Evidencia del impacto comunitario
+
+#### **Para Evaluaciones:**
+- **Visitas totales** = Alcance del proyecto
+- **Episodios populares** = Contenido más impactante
+- **Mensajes recibidos** = Interacción comunitaria
+- **Consistencia de visitas** = Sostenibilidad del proyecto
+
+### 💡 **Consejos para Maximizar el Impacto:**
+
+#### **Promoción del Podcast:**
+- Comparte el link en redes sociales
+- Anuncia nuevos episodios
+- Invita a la comunidad local a participar
+
+#### **Engagement Estratégico:**
+- Crea contenido relevante para Lamud, Amazonas
+- Responde a mensajes de contacto
+- Anima la participación de estudiantes
+
+#### **Seguimiento Regular:**
+- Revisa analytics semanalmente
+- Ajusta estrategia según datos
+- Documenta mejoras implementadas
+
+### 🎓 **Impacto Educativo Medible:**
+
+El sistema permite demostrar:
+- **Creatividad:** Diseño y contenido original
+- **Actividad:** Gestión continua del podcast
+- **Servicio:** Impacto en la comunidad local
+
+**Datos objetivos** fortalecen tu portafolio CAS y mejoran tu evaluación final.
 - **Previsualización en tiempo real**
 
 ### ➕ **Agregar Nuevos Episodios**
@@ -181,6 +297,70 @@ Compartir solo con miembros autorizados del equipo CAS:
 
 ### **Consejos móviles:**
 - **Usa landscape** para mejor experiencia
+- **Analytics** se adapta al móvil con gráficos responsivos
+
+---
+
+## 📊 **Funcionalidades del Sistema de Analytics**
+
+### **🔍 Datos que se Recogen Automáticamente:**
+
+#### **📈 Visitas:**
+- Contador total de visitas
+- Visitantes únicos (sin duplicados)
+- Patrones diarios/semanales
+
+#### **🎧 Contenido:**
+- Clicks en episodios
+- Episodios más populares
+- Tiempo de interacción
+
+#### **💬 Contacto:**
+- Mensajes del formulario
+- Fechas de envío
+
+#### **⚙️ Administración:**
+- Acciones del panel admin
+- Episodios creados/editados
+- Datos exportados
+
+### **📥 Exportación de Analytics:**
+
+1. **Accede al panel** → **Analytics**
+2. **Click en "📥 Exportar Datos"**
+3. **Se descarga archivo JSON** con todos los datos
+4. **Úsalo para tu reporte CAS**
+
+### **🔄 Reiniciar Analytics:**
+
+**Solo si es necesario:**
+- **Click en "🔄 Reiniciar Analytics"**
+- **Confirma la acción**
+- ⚠️ **Se eliminan TODAS las estadísticas**
+
+---
+
+## 🎯 **Mejores Prácticas para Proyecto CAS**
+
+### **📊 Tracking del Impacto:**
+- **Revisa analytics semanalmente**
+- **Documenta mejoras implementadas**
+- **Toma screenshots del progreso**
+
+### **🎧 Optimización del Contenido:**
+- **Analiza episodios más populares**
+- **Crea más contenido similar**
+- **Responde a feedback de la comunidad**
+
+### **💬 Comunicación Efectiva:**
+- **Atiende mensajes de contacto**
+- **Anuncia nuevos episodios**
+- **Construye comunidad alrededor del podcast**
+
+### **📈 Crecimiento Sostenible:**
+- **Establece calendario de publicación**
+- **Promociona en redes sociales**
+- **Mide y ajusta estrategia**
 - **Zoom in** si necesitas ver mejor los formularios
 - **Espera** a que carguen las imágenes
 
@@ -211,6 +391,63 @@ Si necesitas **cambiar la contraseña**:
 1. Busca en el código: `const ADMIN_PASSWORD = 'coar2024'`
 2. Cambia por tu nueva contraseña
 3. Actualiza esta documentación
+
+---
+
+## 📱 **NUEVAS FUNCIONALIDADES PWA Y WHATSAPP**
+
+### **🔄 Progressive Web App (PWA)**
+Tu sitio ahora funciona como una **aplicación móvil instalable**:
+
+#### **Instalación:**
+- **Android**: Automáticamente pregunta si instalar (o desde navegador > "Instalar app")
+- **iOS**: Safari > "Compartir" > "Agregar a pantalla de inicio"
+- **Escritorio**: Chrome/Edge > Icono de instalación en la barra de direcciones
+
+#### **Beneficios:**
+- ✅ **Carga súper rápida** (cache inteligente)
+- ✅ **Funciona sin internet** (episodios guardados)
+- ✅ **Experiencia nativa** (se siente como app real)
+- ✅ **Notificaciones** (opcional para nuevos episodios)
+
+#### **Archivos PWA agregados:**
+- `manifest.json` - Configuración de la app
+- `sw.js` - Service Worker para cache y offline
+
+### **💬 Botones de WhatsApp (Nueva Sección CTA)**
+
+#### **Ubicaciones de los botones:**
+1. **En cada episodio** - Después del botón "Reproducir"
+   - Permite contactar directamente sobre contenido del episodio
+   - Mensaje personalizado por episodio
+
+2. **Sección CTA principal** - Entre contacto y footer
+   - Botón "Unirme por WhatsApp" 
+   - Botón alternativo para contacto por email
+
+#### **Números de WhatsApp:**
+- **¡IMPORTANTE!** Cambia `51999999999` por el número real del proyecto
+- Ubicación en código: Línea 1276, 1483, y sección CTA
+
+#### **Mensajes automáticos:**
+- Por episodio: Se incluye el título automáticamente
+- Sección general: Mensaje de bienvenida al movimiento
+
+#### **Personalización:**
+1. Buscar `51999999999` en el código
+2. Reemplazar con número real (código + número)
+3. Los mensajes se adaptan automáticamente
+
+### **📊 Impacto en Analytics:**
+- Los botones de WhatsApp no afectan métricas
+- Se mantienen las mismas estadísticas (visitas, episodios, contactos)
+- Puede agregarse tracking de "Clicks WhatsApp" si necesitas
+
+### **🚀 Beneficios para CAS:**
+- **Mayor engagement comunitario**
+- **Canales de comunicación directa**
+- **Experiencia móvil profesional**
+- **Impacto medible en comunidad**
 
 ---
 
