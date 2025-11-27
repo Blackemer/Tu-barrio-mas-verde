@@ -1230,15 +1230,16 @@
                         <div class="form-group">
                             <label class="form-label" for="episode-video-url">URL del video/podcast (Opcional)</label>
                             <input type="url" id="episode-video-url" class="form-input"
-                                placeholder="https://youtube.com/watch?v=..." required>
+                                placeholder="https://youtube.com/watch?v=...">
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="episode-image-url">URL de la imagen (o ruta local ej:
-                                CAS/foto.jpg)</label>
-                            <input type="text" id="episode-image-url" class="form-input" placeholder="CAS/mi-foto.jpg">
-                            <small style="color: #666; display: block; margin-top: 0.5rem;">Para usar una imagen local,
-                                coloca el archivo en la carpeta 'CAS' y escribe su nombre aquí (ej:
-                                CAS/imagen.jpg)</small>
+                            <label class="form-label" for="episode-image-url">URL de la imagen (Imgur, Unsplash,
+                                etc.)</label>
+                            <input type="url" id="episode-image-url" class="form-input"
+                                placeholder="https://i.imgur.com/..." required>
+                            <small style="color: #666; display: block; margin-top: 0.5rem;">Recomendamos subir tu imagen
+                                a <a href="https://imgur.com/upload" target="_blank">Imgur</a> y pegar el link
+                                aquí.</small>
                         </div>
                         <!-- File upload removed to save space -->
                         <button type="submit" class="btn btn-primary">Agregar Episodio</button>
