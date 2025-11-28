@@ -286,6 +286,7 @@
             margin-bottom: 1rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -635,6 +636,7 @@
             margin-bottom: 1rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -680,77 +682,7 @@
             transform: translateY(-1px);
         }
 
-        /* Contact Form */
-        .contact-section {
-            max-width: 600px;
-            margin: 0 auto;
-        }
 
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-dark);
-            font-size: 1rem;
-        }
-
-        .form-input:focus {
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(198, 224, 140, 0.3);
-        }
-
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            background: var(--accent-color);
-            color: var(--primary-color);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-        }
-
-        .submit-button:hover {
-            background: #a8d975;
-            transform: translateY(-2px);
-        }
-
-        .form-success {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            display: none;
-        }
 
         /* Footer */
         .footer {
@@ -1129,11 +1061,9 @@
                 <a href="#episodios" class="cta-button">🎧 Escucha nuestro podcast</a>
 
                 <div
-                    style="margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-radius: 20px; overflow: hidden; animation: fadeInUp 0.8s ease 0.6s both;">
-                    <video controls width="100%" poster="CAS/episode1.png" style="display: block;">
-                        <source src="CAS/cas.mp4" type="video/mp4">
-                        Tu navegador no soporta la reproducción de video.
-                    </video>
+                    style="margin-top: 3rem; max-width: 400px; margin-left: auto; margin-right: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-radius: 20px; overflow: hidden; animation: fadeInUp 0.8s ease 0.6s both; background: white;">
+                    <iframe src="https://www.instagram.com/reel/DRlL2p4gjq2/embed" width="100%" height="480"
+                        frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
             </div>
         </section>
@@ -1318,22 +1248,22 @@
                         title: "Introducción a Tu barrio más verde",
                         description: "Conocemos el proyecto CAS que transformará Lamud, Amazonas. Descubre nuestra misión de crear conciencia ambiental en la comunidad.",
                         script: "¡Hola a todos! Bienvenidos al primer episodio de 'Tu barrio más verde'. Soy estudiante del COAR Amazonas y hoy quiero contarles sobre nuestro proyecto CAS. Estamos en Lamud, una ciudad hermosa, pero que enfrenta retos con la basura. Nuestro objetivo es simple: educar y actuar. Queremos que cada vecino se convierta en un agente de cambio. En este podcast, hablaremos de residuos, compostaje y cómo pequeñas acciones logran grandes cambios. ¡Acompáñanos en esta aventura verde!",
-                        videoUrl: "CAS/inicio1.mp4",
-                        imageUrl: "CAS/episode1.png"
+                        videoUrl: "https://www.instagram.com/reel/DRlL2p4gjq2/",
+                        imageUrl: "https://i.imgur.com/y7ahmwU.jpeg"
                     },
                     {
                         title: "Residuos orgánicos vs. inorgánicos",
                         description: "Aprendemos sobre la clasificación de residuos y cómo podemos reducir nuestro impacto ambiental en el hogar.",
                         script: "Bienvenidos de nuevo. Hoy vamos a resolver una duda común: ¿Qué va en cada tacho? Los residuos orgánicos son todo lo que alguna vez tuvo vida: cáscaras de fruta, restos de verduras, hojas secas. Estos son oro puro para la tierra. Por otro lado, los inorgánicos son el plástico, vidrio, latas. El problema es cuando los mezclamos. Si separas tus residuos, facilitas el reciclaje y evitas que la basura orgánica se pudra en el vertedero generando gases nocivos. ¡Separa y vencerás!",
                         videoUrl: "#",
-                        imageUrl: "CAS/episode2.png"
+                        imageUrl: "https://i.imgur.com/PNLK1Bo.jpeg"
                     },
                     {
                         title: "Compostaje casero",
                         description: "Guía práctica para crear tu propio compost en casa y aprovechar los residuos orgánicos de manera inteligente.",
                         script: "¿Sabías que puedes reducir tu basura a la mitad? El secreto es el compostaje. Es muy fácil. Necesitas un balde o un espacio en tu jardín. Coloca una capa de hojas secas, luego tus residuos orgánicos picados, y cubre con más hojas o tierra. Manténlo húmedo pero no empapado. En unas semanas, tendrás abono natural para tus plantas. Es magia pura: transformas basura en vida. ¡Inténtalo hoy mismo!",
                         videoUrl: "#",
-                        imageUrl: "CAS/episode3.png"
+                        imageUrl: "https://i.imgur.com/aEdqiYe.jpeg"
                     }
                 ];
             }
@@ -1495,58 +1425,8 @@
             updatePreview();
         });
 
-        // Drag and drop functionality
-        const dropZone = document.getElementById('drop-zone');
-        const imageInput = document.getElementById('image-input');
-        const previewImage = document.getElementById('preview-image');
-
-        dropZone.addEventListener('dragover', function (e) {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
-
-        dropZone.addEventListener('dragleave', function (e) {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-        });
-
-        dropZone.addEventListener('drop', function (e) {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileUpload(files[0]);
-            }
-        });
-
-        imageInput.addEventListener('change', function (e) {
-            if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
-            }
-        });
-
-        dropZone.addEventListener('click', function () {
-            imageInput.click();
-        });
-
-        function handleFileUpload(file) {
-            // In a real implementation, you would upload to a service like Imgur
-            // For demo purposes, we'll use a placeholder or FileReader
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage.src = e.target.result;
-                previewImage.style.display = 'block';
-                document.getElementById('episode-image-url').value = e.target.result;
-                updatePreview();
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function getUploadedImageUrl() {
-            const previewImg = document.getElementById('preview-image');
-            return previewImg.style.display !== 'none' ? previewImg.src : '';
-        }
+        // Drag and drop functionality removed as the HTML elements were removed
+        // to save space and simplify the interface.
 
         // Preview functionality
         function updatePreview() {
@@ -2031,18 +1911,8 @@
         trackVisit();
 
         // Show analytics button in admin if authenticated
-        document.addEventListener('DOMContentLoaded', function () {
-            if (isAdminAuthenticated) {
-                const nav = document.querySelector('.admin-nav');
-                if (nav && !nav.querySelector('[onclick="showSection(\'analytics\')"]')) {
-                    const analyticsBtn = document.createElement('button');
-                    analyticsBtn.innerHTML = '📊 Analytics';
-                    analyticsBtn.onclick = () => showSection('analytics');
-                    analyticsBtn.className = 'nav-button';
-                    nav.appendChild(analyticsBtn);
-                }
-            }
-        });
+        // Analytics button is already present in the HTML structure
+
 
         // Restore admin session if exists
         const adminAuth = localStorage.getItem('tbmv_admin_auth');
@@ -2074,17 +1944,8 @@
             deferredPrompt = e;
 
             // Mostrar botón de instalación después de unos segundos
-            setTimeout(function () {
-                if (confirm('¿Te gustaría instalar "Tu barrio más verde" como app para acceso rápido?')) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function (choiceResult) {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('PWA: Usuario aceptó instalar la app');
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            }, 5000);
+            // Removed intrusive confirm dialog
+            console.log('PWA: App lista para instalar');
         });
 
         // Detectar si la app ya está instalada
