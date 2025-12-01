@@ -1037,6 +1037,167 @@
                 flex-direction: column;
             }
         }
+
+        /* Game Styles */
+        .game-section {
+            text-align: center;
+            background: #e8f5e9;
+        }
+
+        .game-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .game-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .waste-display {
+            font-size: 5rem;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        .bins-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .bin-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+            color: white;
+            min-width: 100px;
+        }
+
+        .bin-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .bin-organic {
+            background-color: #4CAF50;
+        }
+
+        .bin-plastic {
+            background-color: #2196F3;
+        }
+
+        .bin-paper {
+            background-color: #9E9E9E;
+        }
+
+        .bin-glass {
+            background-color: #FF9800;
+        }
+
+        /* Facade Player */
+        .player-facade {
+            width: 100%;
+            height: 152px;
+            background-color: #f0f0f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .player-facade::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .play-overlay {
+            z-index: 2;
+            background: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .player-facade:hover .play-overlay {
+            transform: scale(1.1);
+        }
+
+        /* Commitment Counter */
+        .commitment-box {
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .commitment-count {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .commit-btn {
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .commit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: var(--accent-color);
+        }
+
+        .commit-btn.committed {
+            background: #4CAF50;
+            color: white;
+            cursor: default;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
     </style>
 </head>
 
@@ -1070,7 +1231,7 @@
 
                 <div
                     style="margin-top: 3rem; max-width: 400px; margin-left: auto; margin-right: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-radius: 20px; overflow: hidden; animation: fadeInUp 0.8s ease 0.6s both; background: white;">
-                    <iframe src="https://www.instagram.com/reel/DRlL2p4gjq2/embed" width="100%" height="480"
+                    <iframe src="https://www.instagram.com/reel/DRuRYquAiom/embed" width="100%" height="480"
                         frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                 </div>
             </div>
@@ -1094,12 +1255,37 @@
                 <div class="cta-buttons">
                     <a href="#episodios" class="cta-button">🎧 Escuchar todos los episodios</a>
                 </div>
+
+                <div class="commitment-box">
+                    <h3>💚 Nuestro Compromiso Verde</h3>
+                    <span id="commit-count" class="commitment-count">124</span>
+                    <p>Vecinos comprometidos con un Lamud más limpio</p>
+                    <button id="commit-btn" class="commit-btn" onclick="makeCommitment()">✋ ¡Yo me comprometo!</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="juego" class="section game-section">
+            <h2 class="section-title">🎮 ¡Recicla y Gana!</h2>
+            <p style="margin-bottom: 2rem;">Ayúdanos a clasificar los residuos correctamente.</p>
+            <div class="game-container">
+                <div class="game-score">Puntos: <span id="score">0</span></div>
+                <div id="waste-item" class="waste-display">🍎</div>
+                <p id="feedback" style="height: 20px; color: #666; margin-bottom: 1rem;">Selecciona el contenedor
+                    correcto</p>
+                <div class="bins-container">
+                    <button class="bin-btn bin-organic" onclick="checkBin('organico')">🍏 Orgánico</button>
+                    <button class="bin-btn bin-plastic" onclick="checkBin('plastico')">🥤 Plástico</button>
+                    <button class="bin-btn bin-paper" onclick="checkBin('papel')">📄 Papel</button>
+                    <button class="bin-btn bin-glass" onclick="checkBin('vidrio')">🍾 Vidrio</button>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 Tu barrio más verde - COAR Amazonas</p>
+        <p>&copy; 2025 Tu barrio más verde - COAR Amazonas</p>
         <p>Proyecto CAS - Lamud, Amazonas, Perú</p>
         <div style="margin-top: 1.5rem;">
             <a href="https://www.instagram.com/tubarriomasverde?igsh=OHlscjVjcnlodDY3" target="_blank"
@@ -1245,7 +1431,77 @@
 
             // Auto-show login if on admin route
             checkRoute();
+
+            // Init game and commitment
+            initGame();
+            initCommitment();
         });
+
+        // --- Game Logic ---
+        const wasteItems = [
+            { emoji: '🍎', type: 'organico' }, { emoji: '🍌', type: 'organico' }, { emoji: '🍂', type: 'organico' },
+            { emoji: '🥤', type: 'plastico' }, { emoji: '🛍️', type: 'plastico' }, { emoji: '🧴', type: 'plastico' },
+            { emoji: '📰', type: 'papel' }, { emoji: '📦', type: 'papel' }, { emoji: '📄', type: 'papel' },
+            { emoji: '🍾', type: 'vidrio' }, { emoji: '🍷', type: 'vidrio' }, { emoji: '🏺', type: 'vidrio' }
+        ];
+        let currentItem = null;
+        let score = 0;
+
+        function initGame() {
+            nextItem();
+        }
+
+        function nextItem() {
+            currentItem = wasteItems[Math.floor(Math.random() * wasteItems.length)];
+            document.getElementById('waste-item').textContent = currentItem.emoji;
+            document.getElementById('feedback').textContent = "¿Dónde va esto?";
+            document.getElementById('feedback').style.color = "#666";
+        }
+
+        function checkBin(type) {
+            if (currentItem.type === type) {
+                score += 10;
+                document.getElementById('score').textContent = score;
+                document.getElementById('feedback').textContent = "¡Correcto! 🎉";
+                document.getElementById('feedback').style.color = "green";
+                setTimeout(nextItem, 1000);
+            } else {
+                document.getElementById('feedback').textContent = "¡Ups! Intenta de nuevo ❌";
+                document.getElementById('feedback').style.color = "red";
+                score = Math.max(0, score - 5);
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        // --- Commitment Counter ---
+        function initCommitment() {
+            const count = localStorage.getItem('commitment_count') || 124; // Fake start number
+            document.getElementById('commit-count').textContent = count;
+
+            if (localStorage.getItem('user_committed')) {
+                const btn = document.getElementById('commit-btn');
+                btn.textContent = "¡Gracias por tu compromiso! 💚";
+                btn.classList.add('committed');
+            }
+        }
+
+        function makeCommitment() {
+            if (localStorage.getItem('user_committed')) return;
+
+            let count = parseInt(localStorage.getItem('commitment_count') || 124);
+            count++;
+            localStorage.setItem('commitment_count', count);
+            localStorage.setItem('user_committed', 'true');
+
+            document.getElementById('commit-count').textContent = count;
+            const btn = document.getElementById('commit-btn');
+            btn.textContent = "¡Gracias por tu compromiso! 💚";
+            btn.classList.add('committed');
+
+            // Simple animation
+            btn.style.transform = "scale(1.1)";
+            setTimeout(() => btn.style.transform = "scale(1)", 200);
+        }
 
         // Check current route
         function checkRoute() {
@@ -1267,42 +1523,42 @@
                         title: "Introducción a Tu barrio más verde",
                         description: "Conocemos el proyecto CAS que transformará Lamud, Amazonas. Descubre nuestra misión de crear conciencia ambiental en la comunidad.",
                         script: "¡Hola a todos! Bienvenidos al primer episodio de 'Tu barrio más verde'. Soy estudiante del COAR Amazonas y hoy quiero contarles sobre nuestro proyecto CAS. Estamos en Lamud, una ciudad hermosa, pero que enfrenta retos con la basura. Nuestro objetivo es simple: educar y actuar. Queremos que cada vecino se convierta en un agente de cambio. En este podcast, hablaremos de residuos, compostaje y cómo pequeñas acciones logran grandes cambios. ¡Acompáñanos en esta aventura verde!",
-                        videoUrl: "https://www.instagram.com/reel/DRlL2p4gjq2/",
+                        videoUrl: "https://www.instagram.com/reel/DRuRYquAiom/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
                         imageUrl: "https://i.imgur.com/y7ahmwU.jpeg"
                     },
                     {
                         title: "Residuos orgánicos vs. inorgánicos",
                         description: "Aprendemos sobre la clasificación de residuos y cómo podemos reducir nuestro impacto ambiental en el hogar.",
                         script: "Bienvenidos de nuevo. Hoy vamos a resolver una duda común: ¿Qué va en cada tacho? Los residuos orgánicos son todo lo que alguna vez tuvo vida: cáscaras de fruta, restos de verduras, hojas secas. Estos son oro puro para la tierra. Por otro lado, los inorgánicos son el plástico, vidrio, latas. El problema es cuando los mezclamos. Si separas tus residuos, facilitas el reciclaje y evitas que la basura orgánica se pudra en el vertedero generando gases nocivos. ¡Separa y vencerás!",
-                        videoUrl: "#",
+                        videoUrl: "https://open.spotify.com/episode/2eqCHHA7TsDkauGOimronl?si=QNNvEluWTJqel9cPUQl-tQ",
                         imageUrl: "https://i.imgur.com/PNLK1Bo.jpeg"
                     },
                     {
                         title: "Compostaje casero",
                         description: "Guía práctica para crear tu propio compost en casa y aprovechar los residuos orgánicos de manera inteligente.",
                         script: "¿Sabías que puedes reducir tu basura a la mitad? El secreto es el compostaje. Es muy fácil. Necesitas un balde o un espacio en tu jardín. Coloca una capa de hojas secas, luego tus residuos orgánicos picados, y cubre con más hojas o tierra. Manténlo húmedo pero no empapado. En unas semanas, tendrás abono natural para tus plantas. Es magia pura: transformas basura en vida. ¡Inténtalo hoy mismo!",
-                        videoUrl: "#",
+                        videoUrl: "https://open.spotify.com/episode/1cjYKPnarXGAcj4YKSzQmK?si=mZukRm7vSAKPtrcIctLbxA",
                         imageUrl: "https://i.imgur.com/aEdqiYe.jpeg"
                     },
                     {
                         title: "El agua es vida: Cuidemos nuestros ríos",
                         description: "Reflexionamos sobre la importancia del agua en nuestra región y compartimos consejos prácticos para su cuidado desde casa.",
                         script: "¡Hola vecinos! Hoy el tema es vital: el agua. Vivimos en una región privilegiada, pero eso no significa que el recurso sea infinito. ¿Sabías que una gota por segundo en un caño mal cerrado desperdicia 30 litros al día? En este episodio, te invito a revisar tus instalaciones, a cerrar el caño mientras te cepillas y a valorar cada gota. El agua que cuidamos hoy es la que beberán nuestros hijos mañana. ¡Cuidémosla!",
-                        videoUrl: "#",
+                        videoUrl: "https://open.spotify.com/episode/7xsw38qnge42esGGUUYBRH?si=QfnJUG_eQ1yGvLmBzHoW0w",
                         imageUrl: "https://i.imgur.com/7CF91Pc.png"
                     },
                     {
                         title: "Menos plástico, más vida",
                         description: "Analizamos el impacto del plástico de un solo uso en Lamud y proponemos alternativas sostenibles como las bolsas de tela.",
                         script: "El plástico nos invade. Bolsas, botellas, sorbetes... los usamos 5 minutos y tardan 500 años en desaparecer. En Lamud, vemos cómo este plástico termina en nuestras calles y campos. Pero hay solución. Lleva siempre tu bolsa de tela al mercado. Usa un tomatodo recargable. Di 'sin sorbete, por favor'. Pequeños cambios en nuestros hábitos diarios pueden limpiar nuestro barrio. ¡Súmate al reto cero plástico!",
-                        videoUrl: "#",
+                        videoUrl: "https://open.spotify.com/episode/6pgNwlKeoosV3yMPJSWU8a?si=y4-SUIV-QcanzNqUVpZLcw",
                         imageUrl: "https://i.imgur.com/D8EXrLR.png"
                     },
                     {
                         title: "Nuestra biodiversidad: Tesoros de Lamud",
                         description: "Un viaje sonoro por la riqueza natural de nuestra zona, destacando la flora y fauna que debemos proteger.",
                         script: "¿Alguna vez te has detenido a observar las aves de nuestro barrio? Lamud está rodeado de una biodiversidad increíble. Desde el colibrí cola de espátula hasta nuestras orquídeas. Cada especie cumple una función en el ecosistema. Cuando talamos o contaminamos, destruimos su hogar. Hoy quiero invitarte a ser un guardián de la naturaleza. Observa, admira y protege. Nuestra riqueza natural es nuestro mayor tesoro.",
-                        videoUrl: "#",
+                        videoUrl: "https://open.spotify.com/episode/6IperKBTbmQuIgddRugM0j?si=65pMr7LUSTqRc36BVJZdIw",
                         imageUrl: "https://i.imgur.com/s6dTh0R.png"
                     }
                 ];
@@ -1317,24 +1573,54 @@
         // Render episodes on main page
         function renderEpisodes() {
             const container = document.getElementById('episodes-container');
-            container.innerHTML = episodes.map((episode, index) => `
+            container.innerHTML = episodes.map((episode, index) => {
+                let mediaContent = '';
+                const embedUrl = getEmbedUrl(episode.videoUrl);
+
+                if (episode.videoUrl && episode.videoUrl.includes('spotify')) {
+                    // Facade for Spotify
+                    mediaContent = `
+                        <div class="player-facade" onclick="loadSpotifyPlayer(this, '${embedUrl}')" style="background-image: url('${episode.imageUrl}');">
+                            <div class="play-overlay">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>`;
+                } else if (episode.videoUrl && (episode.videoUrl.includes('youtube') || episode.videoUrl.includes('youtu.be'))) {
+                    mediaContent = `<iframe width="100%" height="200" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+                } else if (episode.videoUrl && episode.videoUrl.includes('instagram')) {
+                    mediaContent = `<a href="${episode.videoUrl}" target="_blank" class="btn btn-primary" style="width:100%; text-align:center; display:flex; justify-content:center; align-items:center; gap:8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                        Ver en Instagram
+                     </a>`;
+                } else {
+                    // Fallback to TTS
+                    mediaContent = `
+                        <button class="play-button" onclick="playPodcast(${index})" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                            <span id="btn-icon-${index}">▶️</span> 
+                            <span id="btn-text-${index}">Reproducir Podcast (TTS)</span>
+                        </button>`;
+                }
+
+                return `
                 <div class="episode-card fade-in">
-                    <img src="${episode.imageUrl}" alt="${episode.title}" class="episode-thumbnail" onerror="this.src='https://via.placeholder.com/400x200/2A4B3A/ffffff?text=Imagen'">
+                    <img src="${episode.imageUrl}" alt="${episode.title}" class="episode-thumbnail" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200/2A4B3A/ffffff?text=Imagen'">
                     <div class="episode-info">
                         <h3 class="episode-title">${episode.title}</h3>
                         <p class="episode-description">${episode.description}</p>
-                        <div class="episode-meta">
-                            <button class="play-button" onclick="playPodcast(${index})" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <span id="btn-icon-${index}">▶️</span> 
-                                <span id="btn-text-${index}">Reproducir Podcast</span>
-                            </button>
+                        <div class="episode-meta" style="display:block; margin-top:1rem;">
+                            ${mediaContent}
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
 
             // Render admin episodes
             renderAdminEpisodes();
+        }
+
+        // Helper to load player
+        function loadSpotifyPlayer(element, url) {
+            element.outerHTML = `<iframe style="border-radius:12px" src="${url}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
         }
 
         // Render episodes in admin panel
@@ -1357,6 +1643,8 @@
 
         // Get embed URL for different platforms
         function getEmbedUrl(url) {
+            if (!url) return '';
+
             if (url.includes('youtube.com/watch?v=')) {
                 const videoId = url.split('v=')[1].split('&')[0];
                 return `https://www.youtube.com/embed/${videoId}`;
